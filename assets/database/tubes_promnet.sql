@@ -91,6 +91,8 @@ create table orangtua(
 	umur_ibu int not null,
 	foreign key (ID_siswa) references siswa(ID_siswa)
 );
+alter table orangtua add column (kontak_ayah varchar(15) not null);
+alter table orangtua add column (kontak_ibu varchar(15) not null);
 
 create table UN(
 	ID_UN int primary key auto_increment,
