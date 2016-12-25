@@ -1,0 +1,9 @@
+Alur Penerimaan Peserta Didik Baru
+1. Perwakilan Sekolah (Kepsek/Wakasek) mendaftarkan identitas sekolah serta nama dan nisn siswa
+2. Sistem akan mengenerate akun untuk siswa dan status dari siswa yang didaftarkan oleh sekolah adalah mendaftar
+3. Siswa login dengan akun yang sudah dibuat dan mengupload persyaratan melalui akun tersebut
+4. Jika dirasa sudah lengkap, siswa mensubmit persyaratan
+5. Setelah disubmit, status dari siswa tersebut adalah 'menunggu verifikasi' dari panitia ppdb
+6. Jika data yang disbumit siswa lengkap maka status siswa tersebut menjadi terdaftar. jika tidak status akan menjadi pending dan siswa diberi batas waktu untuk melengkapi.
+7. Siswa dengan status terdaftar akan mendapatkan kartu registrasi siap cetak untuk keperluan daftar ulang.
+8. Pendaftaran online selesai. siswa tinggal menunggu pengumuman.
