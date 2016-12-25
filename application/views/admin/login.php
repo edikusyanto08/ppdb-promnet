@@ -27,19 +27,24 @@
 <body class="hold-transition login-page">
 <div class="login-box">
   <div class="login-logo">
-    <a href="../../index2.html"><b>Login</b> Admin</a>
+    <a href="#"><b>Login</b> Admin</a>
   </div>
   <!-- /.login-logo -->
   <div class="login-box-body">
-    <p class="login-box-msg">Sign in to start your session</p>
+    <p class="login-box-msg">
+      <?php
+        echo validation_errors();
+        if($this->session->has_userdata('status')) echo $this->session->flashdata('status');
+      ?>
+    </p>
 
-    <form action="../../index2.html" method="post">
+    <form action="<?php echo base_url('admin'); ?>" method="POST">
       <div class="form-group has-feedback">
-        <input type="email" class="form-control" placeholder="Email">
-        <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+        <input type="text" class="form-control" name="username" placeholder="Username" required />
+        <span class="glyphicon glyphicon-user form-control-feedback"></span>
       </div>
       <div class="form-group has-feedback">
-        <input type="password" class="form-control" placeholder="Password">
+        <input type="password" name="password" class="form-control" placeholder="Password" required />
         <span class="glyphicon glyphicon-lock form-control-feedback"></span>
       </div>
       <div class="row">

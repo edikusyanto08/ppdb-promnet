@@ -21,8 +21,8 @@
   <div id="topnav">
     <ul>
       <li class="active"><a href="index.html">Beranda</a></li>
-      <li><a href="<?php echo base_url('assets/landingpage/'); ?>pages/style-demo.html">Profil</a></li>
-      <li><a href="pages/full-width.html">Sejarah</a></li>
+      <li><a href="#">Profil</a></li>
+      <li><a href="#">Sejarah</a></li>
       <li><a href="#">Program Studi</a>
         <ul>
           <li><a href="#">Teknik Komputer dan Jaringan</a></li>
@@ -30,8 +30,8 @@
           <li><a href="#">Multimedia</a></li>
         </ul>
       </li>
-      <li><a href="pages/3-columns.html">Fasilitas</a></li>
-      <li class="last"><a href="pages/gallery.html">PPDB</a></li>
+      <li><a href="#">Fasilitas</a></li>
+      <li class="last"><a href="<?php echo base_url('ppdb'); ?>">PPDB</a></li>
     </ul>
     <div  class="clear"></div>
   </div>

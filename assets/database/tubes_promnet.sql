@@ -15,22 +15,6 @@ create table admin(
 	password varchar(35) not null
 );
 
-create table level(
-	ID_level int primary key auto_increment,
-	nama_level varchar(35) not null,
-	status_level int default 1
-);
-
-create table panitia(
-	ID_panitia int primary key auto_increment,
-	nama_panitia varchar(50) not null,
-	username varchar(20) not null,
-	password varchar(32) not null,
-	level_panitia int not null,
-	status_panitia int default 1,
-	foreign key (level_panitia) references level(ID_level)
-);
-
 create table status(
 	ID_status int primary key auto_increment,
 	nama_status varchar(100) not null,
