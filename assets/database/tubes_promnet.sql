@@ -127,3 +127,19 @@ create table pilihan(
 	foreign key (pilihan1) references jurusan(ID_jurusan),
 	foreign key (pilihan2) references jurusan(ID_jurusan)
 );
+
+create table sekolah(
+	ID_sekolah int primary key auto_increment,
+	nama_sekelah varchar(100) not null,
+	NPSN varchar(50) not null,
+	Provinsi int not null,
+	kota int not null,
+	kecamatan int not null,
+	detail longtext not null,
+	kontak varchar(25) not null,
+	daerah varchar(50) not null,
+	status_sekolah varchar(20) not null,
+	akreditasi varchar(5) not null,
+	status int default 0,
+	foreign key (kecamatan) references kecamatan(ID_kecamatan)
+);

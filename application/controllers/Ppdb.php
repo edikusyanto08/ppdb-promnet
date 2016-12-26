@@ -3,12 +3,17 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Ppdb extends CI_Controller {
 
+	public function __construct()
+	{
+		parent::__construct();
+		$this->load->library('Template');
+	}
+
 	public function index()
 	{
-		$this->load->view('ppdb/layout/head');
-		$this->load->view('ppdb/layout/header');
-		$this->load->view('ppdb/layout/body');
-		$this->load->view('ppdb/layout/footer');
+		$content = 'user/login';
+		$data['c'] = 'c';
+		$this->template->user($content, $data);
 	}
 
 }
