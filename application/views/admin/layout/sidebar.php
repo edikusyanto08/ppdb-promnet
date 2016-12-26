@@ -27,14 +27,14 @@
       <ul class="sidebar-menu">
         <li class="header">MAIN NAVIGATION</li>
         <li class="<?php if(isset($menu_dashboard)) echo $menu_dashboard; ?>">
-          <a href="#">
+          <a href="<?php echo base_url('admin'); ?>">
             <i class="fa fa-dashboard"></i> <span>Dashboard</span>
             <span class="pull-right-container">
               <small class="label pull-right bg-green">new</small>
             </span>
           </a>
         </li>
-        <li class="treeview">
+        <li class="treeview <?php if(isset($menu_datamaster)) echo $menu_datamaster; ?>">
           <a href="#">
             <i class="fa fa-files-o"></i>
             <span>Data Master</span>
@@ -44,12 +44,10 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="#"><i class="fa fa-circle-o"></i> Jurusan</a></li>
-            <li><a href="#"><i class="fa fa-circle-o"></i> Provinsi</a></li>
-            <li><a href="#"><i class="fa fa-circle-o"></i> Kota</a></li>
-            <li><a href="#"><i class="fa fa-circle-o"></i> Kecamatan</a></li>
-            <li><a href="#"><i class="fa fa-circle-o"></i> Ujian Nasional</a></li>
-            <li><a href="#"><i class="fa fa-circle-o"></i> Status</a></li>
+            <li class="<?php if(isset($menu_jurusan)) echo $menu_jurusan; ?>"><a href="<?php echo base_url('admin/jurusan'); ?>"><i class="fa fa-circle-o"></i> Jurusan</a></li>
+            <li class="<?php if(isset($menu_lokasi)) echo $menu_lokasi; ?>"><a href="<?php echo base_url('admin/lokasi'); ?>"><i class="fa fa-circle-o"></i> Data Lokasi</a></li>
+            <li class="<?php if(isset($menu_un)) echo $menu_un; ?>"><a href="<?php echo base_url('admin/un'); ?>"><i class="fa fa-circle-o"></i> Ujian Nasional</a></li>
+            <li class="<?php if(isset($menu_status)) echo $menu_status; ?>"><a href="<?php echo base_url('admin/status'); ?>"><i class="fa fa-circle-o"></i> Status</a></li>
           </ul>
         </li>
         
