@@ -34,6 +34,7 @@
             </span>
           </a>
         </li>
+
         <li class="treeview <?php if(isset($menu_datamaster)) echo $menu_datamaster; ?>">
           <a href="#">
             <i class="fa fa-files-o"></i>
@@ -44,10 +45,25 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li class="<?php if(isset($menu_jurusan)) echo $menu_jurusan; ?>"><a href="<?php echo base_url('admin/jurusan'); ?>"><i class="fa fa-circle-o"></i> Jurusan</a></li>
-            <li class="<?php if(isset($menu_lokasi)) echo $menu_lokasi; ?>"><a href="<?php echo base_url('admin/lokasi'); ?>"><i class="fa fa-circle-o"></i> Data Lokasi</a></li>
-            <li class="<?php if(isset($menu_un)) echo $menu_un; ?>"><a href="<?php echo base_url('admin/un'); ?>"><i class="fa fa-circle-o"></i> Ujian Nasional</a></li>
+            <li class="<?php if(isset($menu_jurusan)) echo $menu_jurusan; ?>"><a href="<?php echo base_url('admin/jurusan'); ?>"><i class="fa fa-users"></i> Jurusan</a></li>
+            <li class="<?php if(isset($menu_lokasi)) echo $menu_lokasi; ?>"><a href="<?php echo base_url('admin/lokasi'); ?>"><i class="fa fa-map-marker"></i> Data Lokasi</a></li>
+            <li class="<?php if(isset($menu_un)) echo $menu_un; ?>"><a href="<?php echo base_url('admin/un'); ?>"><i class="fa fa-file-text-o"></i> Ujian Nasional</a></li>
             <li class="<?php if(isset($menu_status)) echo $menu_status; ?>"><a href="<?php echo base_url('admin/status'); ?>"><i class="fa fa-circle-o"></i> Status</a></li>
+          </ul>
+        </li>
+
+        <li class="treeview <?php if(isset($menu_verifikasi)) echo $menu_verifikasi; ?>">
+          <a href="#">
+            <i class="fa fa-eye"></i>
+            <span>Verifikasi</span>
+            <span class="pull-right-container">
+              <!-- <span class="label label-primary pull-right">4</span> -->
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li class="<?php if(isset($menu_sekolah)) echo $menu_sekolah; ?>"><a href="<?php echo base_url('admin/sekolah'); ?>"><i class="fa fa-hospital-o"></i> Sekolah</a></li>
+            <li class="<?php if(isset($menu_siswa)) echo $menu_siswa; ?>"><a href="<?php echo base_url('admin/siswa'); ?>"><i class="fa fa-user"></i> Siswa</a></li>
           </ul>
         </li>
         

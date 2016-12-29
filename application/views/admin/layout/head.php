@@ -12,6 +12,8 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
   <!-- Ionicons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+  <!-- DataTables -->
+  <link rel="stylesheet" href="<?php echo base_url('assets/admin/'); ?>plugins/datatables/dataTables.bootstrap.css">
   <!-- Theme style -->
   <link rel="stylesheet" href="<?php echo base_url('assets/admin/'); ?>dist/css/AdminLTE.min.css">
   <!-- AdminLTE Skins. Choose a skin from the css/skins
@@ -19,6 +21,7 @@
   <link rel="stylesheet" href="<?php echo base_url('assets/admin/'); ?>dist/css/skins/_all-skins.min.css">
   <!-- iCheck -->
   <link rel="stylesheet" href="<?php echo base_url('assets/admin/'); ?>plugins/iCheck/flat/blue.css">
+  <link rel="stylesheet" href="<?php echo base_url('assets/admin/'); ?>plugins/iCheck/all.css">
   <!-- Morris chart -->
   <link rel="stylesheet" href="<?php echo base_url('assets/admin/'); ?>plugins/morris/morris.css">
   <!-- jvectormap -->
@@ -31,12 +34,6 @@
   <link rel="stylesheet" href="<?php echo base_url('assets/admin/'); ?>plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
   <!-- Select2 -->
   <link rel="stylesheet" href="<?php echo base_url('assets/admin/'); ?>plugins/select2/select2.min.css">
-  <script type="text/javascript" charset="utf-8" async defer>
-    $(function () {
-     //Initialize Select2 Elements
-     $(".select2").select2();
-    }
-  </script>
 
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->

@@ -44,7 +44,16 @@
 </div>
 <div class="col-md-4">
 	<div class="box">
-		<form role="form" method="POST" action="<?php echo base_url('ppdb/login_siswa'); ?>">
+		<?php
+			if ($this->session->has_userdata('status')) {
+		?>
+			<p class="bg-danger" style="padding: 10px;">
+				<?php echo $this->session->flashdata('status'); ?>
+			</p>
+		<?php
+			}
+		?>
+		<form role="form" method="POST" action="<?php echo base_url('ppdb/proses_login'); ?>">
 			<div class="form-group">
 			<label>Username</label>
 				<input type="text" class="form-control" name="username" value="" placeholder="Username" required />
@@ -53,16 +62,16 @@
 			<label>Password</label>
 				<input type="password" class="form-control" name="password" placeholder="Password" required />
 			</div>
-			<div class="form-group">	
-				<button class="btn btn-primary" name="siswa" type="submit">Siswa</button>
-				<button class="btn btn-primary" name="sekolah" type="submit">Sekolah</a>
+			<div class="form-group">
+				<button class="btn btn-primary" name="submit" value="siswa" type="submit">Siswa</button>
+				<button class="btn btn-primary" name="submit" value="sekolah" type="submit">Sekolah</a>
 			</div>
 		</form>	
 		<div>Informasi Terkini</div>
 			<ul>												
 				<li><a href="#">Pendaftaran Siswa Baru Tahun Pelajaran 2016/2017 telah dibuka</a></li>
 				<li><a href="#">Syarat Pendaftaran Siswa Baru Tahun Pelajaran 2016/2017</a></li>
-				<li><a href="#">Seleksi Administrasi Siswa Baru Tahun Pelajaran 2016/2017</a></li>
+				<li><a href="<?php echo base_url('ppdb/sekolah'); ?>">Halaman Pendaftaran Sekolah PPDB 2017</a></li>
 			</ul>
 	</div>			
 </div>

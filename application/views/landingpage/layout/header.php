@@ -25,9 +25,15 @@
       <li><a href="#">Sejarah</a></li>
       <li><a href="#">Program Studi</a>
         <ul>
-          <li><a href="#">Teknik Komputer dan Jaringan</a></li>
-          <li><a href="#">Rekayasa Perangkat Lunas</a></li>
-          <li><a href="#">Multimedia</a></li>
+          <?php
+            if ($list_jurusan != NULL) {
+              foreach ($list_jurusan as $value) {
+          ?>
+              <li><a href="<?php echo base_url('welcome/jurusan/') .$value->ID_jurusan; ?>"><?php echo $value->nama_jurusan; ?></a></li>
+          <?php
+              }
+            }
+          ?>
         </ul>
       </li>
       <li><a href="#">Fasilitas</a></li>

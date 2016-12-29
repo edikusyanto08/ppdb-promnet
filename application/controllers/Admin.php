@@ -26,7 +26,8 @@ class Admin extends CI_Controller {
 
 		if ($log == 0) {
 			$this->proses_login();
-			$this->load->view('admin/login');
+			$data['page_header'] = 'Login';
+			$this->load->view('admin/login', $data);
 		}else {
 			$data['menu_dashboard'] = 'active';
 			$content = 'admin/dashboard';
@@ -34,15 +35,10 @@ class Admin extends CI_Controller {
 			$data['b_crumb'] = array(
 									'admin/' => 'Dashboard'
 								);
-			$data['c'] = 'c';
+			$data['sekolah_terdaftar'] = $this->db->count_all('sekolah');
 
 			$this->template->admin($content, $data);
 		}
-	}
-
-	function coba()
-	{
-		$this->load->view('advanced');
 	}
 
 	function proses_login()
@@ -72,7 +68,6 @@ class Admin extends CI_Controller {
 	{
 		$data['page_header'] = 'Jurusan';
 		$data['b_crumb'] = array (
-			base_url('admin') => 'Dashboard',
 			'#' => 'Data Master',
 			'' => 'Jurusan'
 		);
@@ -117,7 +112,6 @@ class Admin extends CI_Controller {
 	{
 		$data['page_header'] = 'Data Lokasi';
 		$data['b_crumb'] = array (
-			base_url('admin') => 'Dashboard',
 			'#' => 'Data Master',
 			' ' => 'Data Lokasi'
 		);
@@ -178,7 +172,6 @@ class Admin extends CI_Controller {
 	{
 		$data['page_header'] = 'Ujian Nasional';
 		$data['b_crumb'] = array (
-			base_url('admin') => 'Data Lokasi',
 			'#' => 'Data Master',
 			'' => 'Ujian Nasional'
 		);
@@ -192,7 +185,6 @@ class Admin extends CI_Controller {
 	{
 		$data['page_header'] = 'Status Pendaftaran';
 		$data['b_crumb'] = array (
-			base_url('admin') => 'Data Lokasi',
 			'#' => 'Data Master',
 			'' => 'Status Pendaftaran'
 		);
@@ -232,10 +224,83 @@ class Admin extends CI_Controller {
 		redirect(base_url('admin/status'),'refresh');
 	}
 
+	function sekolah()
+	{
+		$data['page_header'] = 'Verifikasi Sekolah';
+		$data['b_crumb'] = array (
+			'#' => 'Verifikasi',
+			'' => 'Verifikasi Sekolah'
+		);
+
+		$data['list_sekolah'] = $this->GeneralModel->get_list_sekolah();
+
+		$this->template->admin('admin/sekolah', $data);
+	}
+
+	function verifikasi($table, $update, $where)
+	{
+		$id = "ID_" .$table;
+		$this->db->where($id, $where);
+		$data['status'] = $update;
+		$this->db->update($table, $data);
+
+		if ($this->db->affected_rows() > 0) {
+			$sekolah = $this->GeneralModel->get_data_sekolah_by_id($where);
+			$this->coba($sekolah);
+		}else{
+			$this->session->set_flashdata('status', 'Status gagal diperbaharui');
+		}
+
+		redirect(base_url('admin/sekolah'),'refresh');
+	}
+
 	function logout()
 	{
 		$this->session->sess_destroy();
 		redirect(base_url('admin'),'refresh');
+	}
+	
+	function coba($sekolah)
+	{
+		$config = Array(
+	      'protocol' => 'smtp',
+	      'smtp_host' => 'ssl://smtp.googlemail.com',
+	      'smtp_port' => 465,
+	      'smtp_user' => 'simanjuntakronaldo9@gmail.com',
+	      'smtp_pass' => 'forzamilan14',
+	      'mailtype' => 'html',
+	      'charset' => 'iso-8859-1',
+	      'wordwrap' => TRUE
+	    );
+
+		$this->load->library('email', $config);
+
+		$this->email->set_newline("\r\n");
+		$this->email->from('ppdb@smkn88bdg.sch.id', 'Panitia PPDB SMKN 88 BDG');
+		$this->email->to($sekolah->email);
+		/*$this->email->cc('another@another-example.com');
+		$this->email->bcc('them@their-example.com');*/
+
+		$header = "MIME-Version: 1.0" . "\r\n";
+		$header .= "Content-type:text/html;charset=iso-8859-1" . "\r\n";
+		$header .= 'From: <ppdb@smkn88bdg.sch.id>'. "\r\n";
+
+		$this->email->subject('Pendaftaran PPDB Online');
+		$msg = "Terimaskasih telah mendaftar. Kini " .$sekolah->nama_sekolah ." sudah resmi terdaftar di PPDB onlin SMKN 88 Bandung.\r\n";
+		$msg .= "Silahkan login ke website PPDB Online SMKN 88 Bandung dengan akun berikut: \r\n";
+		$msg .= "Username : " .$sekolah->username ."\r\n";
+		$msg .= " dan \r\n";
+		$msg .= "Password : " .$sekolah->password ."\r\n";
+		
+		$this->email->message($msg);
+		$this->email->set_header('Header', $header);
+
+		if ($this->email->send()) {
+			$this->session->set_flashdata('status', 'Status diperbaharui. info akun terkirim ke email sekolah');
+		}else {
+			echo $this->email->print_debugger();
+			 $this->session->set_flashdata('status', 'Email tidak Terkirim');
+		}
 	}
 
 }

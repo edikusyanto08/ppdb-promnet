@@ -2,7 +2,7 @@ body{
 	color:#222;	
 	font-family: 'lucida grande',tahoma,verdana,arial,sans-serif;
 	font-size:14px;
-	background-color:#d9e0e7;
+	background-color:#eee;
 }
 
 .top{
@@ -11,7 +11,6 @@ body{
 	font-weight:bold;
 	color:#fff;
 	padding : 5px;
-	margin-bottom: 6px;
 	border-bottom: 6px solid #CCC;
 }
 
@@ -23,10 +22,10 @@ h5 {
 }
 
 .box{
-	margin:20px 0px;
+	/*margin:20px 0px;
 	background-color:#fff;
 	padding: 20px;
-	border-radius: 4px;
+	border-radius: 4px;*/
 }
 .box img {
 	width: 100%;
