@@ -48,7 +48,18 @@ class GeneralModel extends CI_Model {
 		$data['password'] = md5($pass);
 		$this->db->where($id, $where);
 		$this->db->update($table, $data);
-		
+
+		if ($this->db->affected_rows() > 0) {
+			return 1;
+		}else return 0;
+	}
+
+	function update_log($table, $where)
+	{
+		$id = "ID_" .$table;
+		$this->db->where('', $where);
+		$data['log'] = 1;
+		$this->db->update($table, $data);
 		if ($this->db->affected_rows() > 0) {
 			return 1;
 		}else return 0;

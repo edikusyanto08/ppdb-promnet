@@ -7,6 +7,7 @@ class Sekolah extends CI_Controller {
 	{
 		parent::__construct();
 		$this->load->library('Template');
+		$this->load->model('GeneralModel');
 	}
 
 	public function index()
@@ -25,6 +26,10 @@ class Sekolah extends CI_Controller {
 	function pengaturan()
 	{
 		$data['title'] = 'Pengaturan';
+		$data['sekolah'] = $this->GeneralModel->get_data_sekolah_by_id($this->session->userdata('ID_sekolah'));
+		$data['list_provinsi'] = $this->GeneralModel->get_all('provinsi');
+		$data['list_kota'] = $this->GeneralModel->get_all('kota');
+		$data['list_kec'] = $this->GeneralModel->get_all('kecamatan');
 
 		$this->template->user('user/sekolah/pengaturan', $data);
 	}
