@@ -29,8 +29,10 @@ create table siswa(
 	password varchar(32) not null,
 	email varchar(50) null,
 	kontak varchar(15) null,
+	ID_sekolah int not null,
 	status_pendaftaran int not null,
-	foreign key (status_pendaftaran) references status(ID_status)
+	foreign key (status_pendaftaran) references status(ID_status),
+	foreign key (ID_sekolah) references sekolah(ID_sekolah)
 );
 
 create table provinsi(

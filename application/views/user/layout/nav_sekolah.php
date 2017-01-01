@@ -27,7 +27,7 @@
             <span class="caret"></span>
           </a>
           <ul class="dropdown-menu">
-            <li class="<?php if(isset($menu_siswa)) echo"active"; ?>"><a href="<?php echo base_url('sekolah/profile'); ?>">Profile</a></li>
+            <li class="<?php if(isset($menu_profile)) echo"active"; ?>"><a href="<?php echo base_url('sekolah/profile'); ?>">Profile</a></li>
             <li><a href="<?php echo base_url('sekolah/pemberitahuan'); ?>">Pemberitahuan</a></li>
             <li><a href="<?php echo base_url('sekolah/pengaturan'); ?>">Pengaturan</a></li>
             <li role="separator" class="divider"></li>

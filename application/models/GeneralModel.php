@@ -65,6 +65,27 @@ class GeneralModel extends CI_Model {
 		}else return 0;
 	}
 
+	function update_table($table, $data, $where)
+	{
+		$id = "ID_" .$table;
+		$this->db->where($id, $where);
+		$r = $this->db->update($table, $data);
+		if ($this->db->affected_rows() > 0) {
+			return $this->db->affected_rows();
+		}else return FALSE;
+	}
+
+	function log($id, $msg, $usr)
+	{
+		$data['ID_akses'] = $id;
+		$data['aksi'] = $msg;
+		$data['waktu'] = date('Y/m/d H:i:s');
+		$data['user'] = $usr;
+
+
+		$this->db->insert('log', $data);
+	}
+
 }
 
 /* End of file generalModel.php */

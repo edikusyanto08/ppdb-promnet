@@ -34,6 +34,28 @@ class Sekolah extends CI_Controller {
 		$this->template->user('user/sekolah/pengaturan', $data);
 	}
 
+	function update_sekolah()
+	{
+		$r = $this->GeneralModel->update_table('sekolah', $_POST, $_POST['ID_sekolah']);
+		if ($r > 0) {
+			$this->session->set_flashdata('status2', 'Data berhasil diubah');
+		}else $this->session->set_flashdata('status2', 'Data tidak diubah');
+
+		redirect(base_url('sekolah/pengaturan'),'refresh');
+	}
+
+	function siswa()
+	{
+		$data['title'] = 'Siswa';
+		$data['menu_siswa'] = 1;
+
+		$where['ID_sekolah'] = $this->session->userdata('ID_sekolah');
+		$r = $this->db->get_where('siswa', $where);
+		$data['list_siswa'] = $r->result();
+
+		$this->template->user('user/sekolah/siswa', $data);
+	}
+
 }
 
 /* End of file sekolah.php */

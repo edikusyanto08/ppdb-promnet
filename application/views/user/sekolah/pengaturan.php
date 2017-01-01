@@ -1,6 +1,42 @@
+<style type="text/css" media="screen">
+	.hide {
+		display: none;
+	}
+</style>
+<script type="text/javascript" charset="utf-8" >
+	function hide()
+	{
+		var x = document.getElementById('hide');
+		x.className = 'hide';
+	}
+</script>
+
+<?php
+	if ($this->session->has_userdata('status2')) {
+?>
+	<div id="hide" class="col-md-12 col-sm-12 col-xs-12">
+		<div class="box box-solid bg-teal-gradient">
+	        <div class="box-header">
+	          <i class="fa fa-check"></i>
+
+	          <p class="box-title">
+	          	<?php echo $this->session->flashdata('status2'); ?>
+	          </p>
+
+	          <div class="box-tools pull-right">
+	            <button type="button" class="btn bg-teal btn-sm" onclick="hide()" data-widget="remove"><i class="fa fa-times"></i>
+	            </button>
+	          </div>
+	        </div>
+	    </div>
+	</div>
+<?php
+	}
+?>
+
 <div class="col-md-8 col-sm-8 col-xs-12">
 	<div class="box box-primary">
-		<form action="" method="POST" accept-charset="utf-8">
+		<form action="<?php echo base_url('sekolah/update_sekolah'); ?>" method="POST" accept-charset="utf-8">
 			<div class="form-group">
 				<label for="npsn">NPSN</label>
 				<input type="text" name="npsn" id="npsn" class="form-control" disabled value="<?php echo $sekolah->NPSN; ?>" placeholder="">
@@ -75,13 +111,14 @@
 			<div class="form-group">
 				<label for="Akreditasi">Akreditasi</label>
 				<select name="akreditasi" class="form-control" >
-					<option <?php if($sekolah->daerah == 'A') echo "selected"; ?> value="A">A</option>
-					<option <?php if($sekolah->daerah == 'B') echo "selected"; ?> value="B">B</option>
-					<option <?php if($sekolah->daerah == 'C') echo "selected"; ?> value="C">C</option>
+					<option <?php if($sekolah->akreditasi == 'A') echo "selected"; ?> value="A">A</option>
+					<option <?php if($sekolah->akreditasi == 'B') echo "selected"; ?> value="B">B</option>
+					<option <?php if($sekolah->akreditasi == 'C') echo "selected"; ?> value="C">C</option>
 				</select>
 			</div>
 
 			<div class="form-group">
+				<input type="hidden" name="ID_sekolah" value="<?php echo $sekolah->ID_sekolah; ?>">
 				<button type="submit" class="btn btn-success">Simpan</button>
 			</div>
 		</form>

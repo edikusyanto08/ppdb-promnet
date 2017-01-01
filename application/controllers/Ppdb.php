@@ -57,6 +57,30 @@ class Ppdb extends CI_Controller {
 		}
 	}
 
+	function proses_siswa()
+	{
+		// cek apakah nisn sudah terdaftar?
+		$where['NISN'] = $this->input->post('NISN');
+		$r = $this->db->get_where('siswa', $where);
+		if ($r->num_rows() > 0) {
+			$this->session->set_flashdata('status', 'Pendaftaran gagal. NISN sudah terdaftar');
+			redirect(base_url('sekolah/siswa'),'refresh');
+		}
+
+		$_POST['username'] = $this->RandomString();
+		$_POST['password'] = $this->RandomString();
+
+		$this->db->insert('siswa', $_POST);
+
+		if ($this->db->affected_rows() > 0) {
+			$this->session->set_flashdata('status', 'Siswa berhasil didaftarkan');
+		}else {
+			$this->session->set_flashdata('status', 'Siswa gagal didaftarkan. coba lagi atau hubungi panitia');
+		}
+
+		redirect(base_url('sekolah/siswa'),'refresh');
+	}
+
 	function RandomString()
 	{
 	    $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
@@ -119,6 +143,9 @@ class Ppdb extends CI_Controller {
 							$update_log = $this->GeneralModel->update_log('sekolah', $r->ID_sekolah);
 						}
 
+						// mencatat log
+						$this->GeneralModel->log($r->ID_sekolah, "Logged In", "sekolah");
+
 						redirect(base_url('sekolah'),'refresh');
 					}else {
 						$this->session->set_flashdata('status', 'Error pembaruan akun. silahkan hubungi administrator');
@@ -137,6 +164,9 @@ class Ppdb extends CI_Controller {
 					);
 				
 				$this->session->set_userdata($array);
+
+				// mencatat log
+				$this->GeneralModel->log($r->ID_sekolah, "Logged In", "sekolah");
 
 				redirect(base_url('sekolah'),'refresh');
 			}
@@ -171,7 +201,16 @@ class Ppdb extends CI_Controller {
 
 	function logout()
 	{
+		// mencatat log
+		if ($this->session->has_userdata('ID_sekolah')) {
+			$this->GeneralModel->log($this->session->userdata('ID_sekolah'), "Logged Out", "sekolah");
+		}else if ($this->session->has_userdata('ID_siswa')) {
+			$this->GeneralModel->log($this->session->userdata('ID_sekolah'), "Logged Out", "siswa");
+		}else {
+			$this->GeneralModel->log($this->session->userdata('ID_sekolah'), "Logged Out", "admin");
+		}
 		$this->session->sess_destroy();
+
 		redirect(base_url('ppdb'),'refresh');
 	}
 

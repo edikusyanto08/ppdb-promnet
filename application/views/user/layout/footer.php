@@ -12,11 +12,8 @@
 </script>
 <!-- Bootstrap 3.3.6 -->
 <script src="<?php echo base_url('assets/admin/'); ?>bootstrap/js/bootstrap.min.js"></script>
-
 <!-- Sparkline -->
 <script src="<?php echo base_url('assets/admin/'); ?>plugins/sparkline/jquery.sparkline.min.js"></script>
-
-
 <!-- Slimscroll -->
 <script src="<?php echo base_url('assets/admin/'); ?>plugins/slimScroll/jquery.slimscroll.min.js"></script>
 <!-- FastClick -->
@@ -37,16 +34,31 @@
 <script src="<?php echo base_url('assets/admin/'); ?>plugins/input-mask/jquery.inputmask.date.extensions.js"></script>
 <script src="<?php echo base_url('assets/admin/'); ?>plugins/input-mask/jquery.inputmask.extensions.js"></script>
 
-<!-- SlimScroll 1.3.0 -->
-<script src="<?php echo base_url('assets/admin/'); ?>plugins/slimScroll/jquery.slimscroll.min.js"></script>
-
-<!-- FastClick -->
-<script src="<?php echo base_url('assets/admin/'); ?>plugins/fastclick/fastclick.js"></script>
-
 <script>
   $(function () {
     //Initialize Select2 Elements
     $(".select2").select2();
+  });
+</script>
+
+<!-- data table / pagination table -->
+<!-- DataTables -->
+<script src="<?php echo base_url('assets/admin/'); ?>plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="<?php echo base_url('assets/admin/'); ?>plugins/datatables/dataTables.bootstrap.min.js"></script>
+<!-- page script -->
+<script>
+  $(function () {
+    $("#example1").DataTable();
+    $('#example2').DataTable({
+      "paging": true,
+      "lengthChange": false,
+      "searching": false,
+      "ordering": true,
+      "info": true,
+      "autoWidth": false
+    });
+    $("#example3").DataTable();
+    $("#example4").DataTable(); 
   });
 </script>
 </body>
