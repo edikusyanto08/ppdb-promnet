@@ -8,6 +8,7 @@ class Sekolah extends CI_Controller {
 		parent::__construct();
 		$this->load->library('Template');
 		$this->load->model('GeneralModel');
+		$this->load->model('UserModel');
 	}
 
 	public function index()
@@ -19,6 +20,7 @@ class Sekolah extends CI_Controller {
 
 		$data['title'] = $this->session->userdata('nama_sekolah');
 		$data['menu_home'] = 1;
+		$data['mendaftar'] = $this->UserModel->count_mendaftar_by_sekolah($this->session->userdata('ID_sekolah'));
 
 		$this->template->user('user/sekolah/sekolah', $data);
 	}

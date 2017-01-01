@@ -57,7 +57,7 @@ class GeneralModel extends CI_Model {
 	function update_log($table, $where)
 	{
 		$id = "ID_" .$table;
-		$this->db->where('', $where);
+		$this->db->where($id, $where);
 		$data['log'] = 1;
 		$this->db->update($table, $data);
 		if ($this->db->affected_rows() > 0) {

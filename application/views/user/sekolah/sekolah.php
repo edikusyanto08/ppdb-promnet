@@ -34,10 +34,14 @@
 	}
 ?>
 
-<div class="col-md-4 col-sm-4 col-xs-12">
+<div class="col-md-3 col-sm-3 col-xs-12">
 	<div class="small-box bg-aqua">
 	    <div class="inner">
-	 	   <h3>0</h3>
+	 	   <h3><?php 
+	 	   		if (isset($mendaftar)) {
+	 	   			echo $mendaftar;
+	 	   		}else echo "0";
+	 	   ?></h3>
 
 	    	<p>Siswa Mendaftar</p>
 	    </div>
@@ -48,12 +52,16 @@
 	</div>
 </div>
 
-<div class="col-md-4 col-sm-4 col-xs-12">
-	<div class="small-box bg-green">
+<div class="col-md-3 col-sm-3 col-xs-12">
+	<div class="small-box bg-red">
 	    <div class="inner">
-	 	   <h3>0</h3>
+	 	   <h3><?php 
+	 	   		if (isset($pending)) {
+	 	   			echo $pending;
+	 	   		}else echo "0";
+	 	   ?></h3>
 
-	    	<p>Siswa Melengkapi Persyaratan</p>
+	    	<p>Siswa Pending</p>
 	    </div>
 	    <div class="icon">
 	    	<i class="fa fa-user"></i>
@@ -62,10 +70,32 @@
 	</div>
 </div>
 
-<div class="col-md-4 col-sm-4 col-xs-12">
+<div class="col-md-3 col-sm-3 col-xs-12">
+	<div class="small-box bg-green">
+	    <div class="inner">
+	 	   <h3><?php 
+	 	   		if (isset($terdaftar)) {
+	 	   			echo $terdaftar;
+	 	   		}else echo "0";
+	 	   ?></h3>
+
+	    	<p>Siswa Terdaftar</p>
+	    </div>
+	    <div class="icon">
+	    	<i class="fa fa-user"></i>
+	    </div>
+	    <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+	</div>
+</div>
+
+<div class="col-md-3 col-sm-3 col-xs-12">
 	<div class="small-box bg-blue">
 	    <div class="inner">
-	 	   <h3>0</h3>
+	 	   <h3><?php 
+	 	   		if (isset($diterima)) {
+	 	   			echo $diterima;
+	 	   		}else echo "0";
+	 	   ?></h3>
 
 	    	<p>Siswa Diterima</p>
 	    </div>

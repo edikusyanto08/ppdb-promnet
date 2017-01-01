@@ -1,11 +1,8 @@
 <style type="text/css">
-	label {
-		font-size: 14px;
-	}
 	.hide {
 		display: none;
 	}
-	.dataTables_length  label, .dataTables_filter label, .dataTables_info, .dataTables_paginate, th {
+	th {
 		font-size: 14px !important;
 	}
 
@@ -47,40 +44,53 @@
 		<div class="box box-info">
 			<div class="page-header">
 				<h4>Daftar Siswa</h4>
-
-				<div class="table-responsive container-fluid">
-					<table class="table" id="example1">
-						<thead>
-							<tr>
-								<th>No</th>
-								<th>NISN</th>
-								<th>Nama Siswa</th>
-								<th>Username</th>
-								<th>Password</th>
-								<th>Aksi</th>
-							</tr>
-						</thead>
-						<tbody>
-							<?php
-								if ($list_siswa != NULL) {
-									$c = 1;
-									foreach ($list_siswa as $value) {
-							?>
-										<tr>
-											<td><?php echo $c; ?></td>
-											<td><?php echo $value->NISN; ?></td>
-											<td><?php echo $value->nama_lengkap; ?></td>
-											<td><?php echo $value->username; ?></td>
-											<td><?php echo $value->password; ?></td>
-											<td><button type="button" class="btn btn-info btn-sm"><i class="fa fa-eye"></i></button></td>
-										</tr>
-							<?php
-									}
+			</div>
+			<div class="table-responsive container-fluid">
+				<table class="table" id="example1">
+					<thead>
+						<tr>
+							<th>No</th>
+							<th>NISN</th>
+							<th>Nama Siswa</th>
+							<th>Username</th>
+							<th>Password</th>
+							<th>Aksi</th>
+						</tr>
+					</thead>
+					<tbody>
+						<?php
+							if ($list_siswa != NULL) {
+								$c = 1;
+								foreach ($list_siswa as $value) {
+						?>
+									<tr>
+										<td><?php echo $c; ?></td>
+										<td><?php echo $value->NISN; ?></td>
+										<td><?php echo $value->nama_lengkap; ?></td>
+										<td><?php echo $value->username; ?></td>
+										<td>
+											<?php
+												if (strlen($value->password) >= 32) {
+											?>
+													<span class="text-danger">Dienkripsi</span>
+											<?php
+												}else {
+													echo $value->password;
+												}
+											?>
+											
+										</td>
+										<td><button type="button" class="btn btn-info btn-sm"><i class="fa fa-eye"></i></button></td>
+									</tr>
+						<?php
 								}
-							?>
-						</tbody>
-					</table>
-				</div>
+							}
+						?>
+					</tbody>
+				</table>
+				<p class="text-danger">
+					*ketika siswa login password akan dienkripsi untuk keamanan.
+				</p>
 			</div>
 		</div>
 	</div>

@@ -11,6 +11,13 @@ class AdminModel extends CI_Model {
 		return $r->row();
 	}
 
+	function count_status_pendaftaran($id)
+	{
+		$this->db->where('status_pendaftaran', $id);
+		$c = $this->db->count_all_results('siswa');
+		return $c;
+	}
+
 }
 
 /* End of file adminModel.php */

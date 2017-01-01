@@ -36,6 +36,9 @@ class Admin extends CI_Controller {
 									'admin/' => 'Dashboard'
 								);
 			$data['sekolah_terdaftar'] = $this->db->count_all('sekolah');
+			$data['siswa_mendaftar'] = $this->AdminModel->count_status_pendaftaran(1);
+			$data['siswa_pending'] = $this->AdminModel->count_status_pendaftaran(2);
+			$data['siswa_terdaftar'] = $this->AdminModel->count_status_pendaftaran(3);
 
 			$this->template->admin($content, $data);
 		}

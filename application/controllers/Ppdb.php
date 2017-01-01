@@ -69,6 +69,7 @@ class Ppdb extends CI_Controller {
 
 		$_POST['username'] = $this->RandomString();
 		$_POST['password'] = $this->RandomString();
+		$_POST['status_pendaftaran'] = 1;
 
 		$this->db->insert('siswa', $_POST);
 
@@ -96,28 +97,61 @@ class Ppdb extends CI_Controller {
 
 		if ($this->input->post('submit') == 'siswa') {
 			// proses login siswa disini
-			$r = $this->GeneralModel->get_login('siswa', $_POST['username'], $_POST['password']);
+			$r = $this->GeneralModel->get_login('siswa', $_POST['username'], md5($_POST['password']));
 
-			if ($r == NULL) { //user pertama kali login
+			if ($r == NULL) { 
+				//user pertama kali login
 				// jika user pertama login password tidak di md5
 				// maka ambil username sama passnya tanpa md5
-				$r = $this->GeneralModel->get_login('sekolah', $_POST['username'], $_POST['password']);
+				$r = $this->GeneralModel->get_login('siswa', $_POST['username'], $_POST['password']);
 
 				if ($r != NULL) {
 					// lalu update passnya jadi md5
 					$u = $this->GeneralModel->md5_pass('siswa', $this->input->post('password'), $r->ID_siswa);
 
 					if ($u > 0) { //kondisi berhasil login
+						$array = array(
+						'log_siswa' => TRUE,
+						'nama_siswa' => $r->nama_lengkap,
+						'ID_siswa' => $r->ID_siswa
+						);
 						
+						$this->session->set_userdata($array);
+
+						if ($r->log == 0) {
+							$this->session->set_flashdata('first_log', '1');
+							$update_log = $this->GeneralModel->update_log('siswa', $r->ID_siswa);
+						}
+
+						// mencatat log
+						$this->GeneralModel->log($r->ID_siswa, "Logged In", "siswa");
+
+						redirect(base_url('siswa'),'refresh');
 					}else {
 						// proses update gagal
+						$this->session->set_flashdata('status', 'Error pembaruan akun. silahkan hubungi administrator');
+						redirect(bsae_url('ppdb'),'refresh');
 					}
 				}else {
 					// username atau password salah
+					$this->session->set_flashdata('status', 'Username atau Password salah');
+					redirect(base_url('ppdb'),'refresh');
 				}
 				
 			}else {
-				// username atau password salah
+				// user sudah pernah login sebelumnya
+				$array = array(
+				'log_siswa' => TRUE,
+				'nama_siswa' => $r->nama_lengkap,
+				'ID_siswa' => $r->ID_siswa
+				);
+				
+				$this->session->set_userdata($array);
+
+				// mencatat log
+				$this->GeneralModel->log($r->ID_siswa, "Logged In", "siswa");
+
+				redirect(base_url('siswa'),'refresh');
 			}
 
 
@@ -205,10 +239,11 @@ class Ppdb extends CI_Controller {
 		if ($this->session->has_userdata('ID_sekolah')) {
 			$this->GeneralModel->log($this->session->userdata('ID_sekolah'), "Logged Out", "sekolah");
 		}else if ($this->session->has_userdata('ID_siswa')) {
-			$this->GeneralModel->log($this->session->userdata('ID_sekolah'), "Logged Out", "siswa");
-		}else {
-			$this->GeneralModel->log($this->session->userdata('ID_sekolah'), "Logged Out", "admin");
+			$this->GeneralModel->log($this->session->userdata('ID_siswa'), "Logged Out", "siswa");
+		}else if($this->session->has_userdata('ID')) {
+			$this->GeneralModel->log($this->session->userdata('ID'), "Logged Out", "admin");
 		}
+
 		$this->session->sess_destroy();
 
 		redirect(base_url('ppdb'),'refresh');
