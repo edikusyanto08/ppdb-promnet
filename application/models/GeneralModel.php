@@ -85,7 +85,7 @@ class GeneralModel extends CI_Model {
 
 		$this->db->insert('log', $data);
 	}
-
+	
 }
 
 /* End of file generalModel.php */

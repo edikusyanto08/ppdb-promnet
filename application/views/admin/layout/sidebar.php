@@ -66,11 +66,34 @@
             <li class="<?php if(isset($menu_siswa)) echo $menu_siswa; ?>"><a href="<?php echo base_url('admin/siswa'); ?>"><i class="fa fa-user"></i> Siswa</a></li>
           </ul>
         </li>
+
+        <li class="<?php if(isset($menu_test)) echo $menu_test; ?>">
+          <a href="<?php echo base_url('admin/test'); ?>">
+            <i class="fa fa-book"></i> <span>Test</span>
+            <span class="pull-right-container">
+              <!-- <small class="label pull-right bg-green">new</small> -->
+            </span>
+          </a>
+        </li>
+
+        <li class="<?php if(isset($menu_penerimaan)) echo $menu_penerimaan; ?>">
+          <a href="<?php echo base_url('admin/penerimaan'); ?>">
+            <i class="fa fa-graduation-cap"></i> <span>Penerimaan</span>
+            <span class="pull-right-container">
+              <!-- <small class="label pull-right bg-green">new</small> -->
+            </span>
+          </a>
+        </li>
+
+        <li class="<?php if(isset($menu_pendaftar)) echo $menu_pendaftar; ?>">
+          <a href="<?php echo base_url('admin/penerimaan'); ?>">
+            <i class="fa fa-user-plus"></i> <span>Penerimaan</span>
+            <span class="pull-right-container">
+              <!-- <small class="label pull-right bg-green">new</small> -->
+            </span>
+          </a>
+        </li>
         
-        <li class="header">LABELS</li>
-        <li><a href="#"><i class="fa fa-circle-o text-red"></i> <span>Important</span></a></li>
-        <li><a href="#"><i class="fa fa-circle-o text-yellow"></i> <span>Warning</span></a></li>
-        <li><a href="#"><i class="fa fa-circle-o text-aqua"></i> <span>Information</span></a></li>
       </ul>
     </section>
     <!-- /.sidebar -->

@@ -19,6 +19,14 @@
         <li class="<?php if(isset($menu_berkas)) echo "active"; ?>" ><a href="<?php echo base_url('siswa/berkas'); ?>">Berkas</a></li>
         <li class="<?php if(isset($menu_nilai)) echo "active"; ?>" ><a href="<?php echo base_url('siswa/nilai'); ?>">Nilai UN</a></li>
         <li class="<?php if(isset($menu_jurusan)) echo "active"; ?>" ><a href="<?php echo base_url('siswa/jurusan'); ?>">Pilihan Jurusan</a></li>
+        <li class="<?php if(isset($menu_verif)) echo "active"; ?>" ><a href="<?php echo base_url('siswa/verifikasi'); ?>">Verifikasi</a></li>
+        <?php
+          if ($this->session->userdata('status_pendaftaran') == 3) {
+        ?>
+        <li class="<?php if(isset($menu_cetak)) echo "active"; ?>" ><a href="<?php echo base_url('siswa/cetak'); ?>">Cetak Kartu</a></li>
+        <?php
+          }
+        ?>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <form class="navbar-form navbar-left">
@@ -37,7 +45,7 @@
             <li><a href="<?php echo base_url('siswa/pemberitahuan'); ?>">Pemberitahuan</a></li>
             <li><a href="<?php echo base_url('siswa/pengaturan'); ?>">Pengaturan</a></li>
             <li role="separator" class="divider"></li>
-            <li><a href="<?php echo base_url('ppdb/logout'); ?>">Logut</a></li>
+            <li><a href="<?php echo base_url('ppdb/logout'); ?>">Logout</a></li>
           </ul>
         </li>
       </ul>

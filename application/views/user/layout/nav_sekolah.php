@@ -31,7 +31,7 @@
             <li><a href="<?php echo base_url('sekolah/pemberitahuan'); ?>">Pemberitahuan</a></li>
             <li><a href="<?php echo base_url('sekolah/pengaturan'); ?>">Pengaturan</a></li>
             <li role="separator" class="divider"></li>
-            <li><a href="<?php echo base_url('ppdb/logout'); ?>">Logut</a></li>
+            <li><a href="<?php echo base_url('ppdb/logout'); ?>">Logout</a></li>
           </ul>
         </li>
       </ul>

@@ -145,3 +145,11 @@ create table sekolah(
 	status int default 0,
 	foreign key (kecamatan) references kecamatan(ID_kecamatan)
 );
+
+create table penerimaan(
+	ID_penerimaan int primary key auto_increment,
+	ID_siswa int not null,
+	ID_jurusan int not null,
+	foreign key (ID_siswa) references siswa(ID_siswa),
+	foreign key (ID_jurusan) references jurusan(ID_jurusan)
+);

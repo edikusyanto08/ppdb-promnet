@@ -9,6 +9,8 @@ class Siswa extends CI_Controller {
 		$this->load->model('GeneralModel');
 		$this->load->model('UserModel');
 		$this->load->library('Template');
+		$this->load->library('Kelengkapan');
+		$this->load->library('Pdf');
 	}
 
 	public function index()
@@ -21,6 +23,35 @@ class Siswa extends CI_Controller {
 		// variabel kebutuhan tampilan
 		$data['title'] = 'Beranda';
 		$data['menu_home'] = 1;
+
+		// mengambil data status
+		$data['siswa'] = $this->UserModel->get_status_siswa($this->session->userdata('ID_siswa'));
+		$nama = $data['siswa']->nama_lengkap;
+
+		if ($data['siswa']->status_pendaftaran == 1) {
+			$data['warna'] = 'info';
+		}else if ($data['siswa']->status_pendaftaran == 2) {
+			$data['warna'] = 'warning';
+		}else if ($data['siswa']->status_pendaftaran == 3) {
+			$data['warna'] = 'primary';
+		}else if ($data['siswa']->status_pendaftaran == 4) {
+			$data['warna'] = 'success';
+
+			$this->db->where('ID_siswa', $this->session->userdata('ID_siswa'));
+			$p = $this->db->get('penerimaan', 1, 0);
+			$p = $p->row();
+
+			$this->db->where('ID_jurusan', $p->ID_jurusan);
+			$j =  $this->db->get('jurusan', 1, 0);
+			$j = $j->row();
+
+			$jurusan = $j->nama_jurusan;
+
+			$data['pesan'] = "Selamat! anda diterima di <strong>SMKN 88 Bandung Jurusan $jurusan</strong>. Mari berkarya dan selamat menempuh jalan baru di SMKN 88 Bandung $nama!";
+		}else if ($data['siswa']->status_pendaftaran == 5) {
+			$data['warna'] = 'danger';
+			$data['pesan'] = "Mohon maaf $nama, Anda belum bisa kami terima. <br> Hei, Sukses adalah kemampuan untuk pergi dari suatu kegagalan tanpa kehilangan semangat. Tetap semangat ya :)";
+		}
 
 		$this->template->user('user/siswa/siswa', $data);
 	}
@@ -161,7 +192,77 @@ class Siswa extends CI_Controller {
 		$data['title'] = 'Berkas';
 		$data['menu_berkas'] = 1;
 
+		// variabel data konten
+		$where['ID_siswa'] = $this->session->userdata('ID_siswa');
+		$r = $this->db->get_where('persyaratan', $where);
+		$data['berkas'] = $r->row();
+
 		$this->template->user('user/siswa/berkas', $data);
+	}
+
+	function proses_berkas()
+	{
+		$id = $this->input->post('ID_siswa');
+		$sum = 0;
+		foreach ($_FILES as $value) {
+			if ($value['name'] != '' || $value['name'] != NULL) {
+				$sum++;
+			}
+		}
+		
+		$uploaded = 0;
+
+		foreach ($_FILES as $key => $value) {
+			if ($_FILES[$key]['name'] != '' || $_FILES[$key]['name'] != NULL) {
+				$config['upload_path']          = './upload/';
+		        $config['allowed_types']        = '*';
+		        $config['max_size']             = 10240;
+		        $config['max_width']            = 1024;
+		        $config['max_height']           = 1024;
+		        $nama_file = $key.$id;
+		        $config['file_name']			= "$key$id";
+		        $config['overwrite']			= TRUE;
+
+		        $this->load->library('upload', $config);
+
+		        if (!$this->upload->do_upload($key))
+		        {
+		                $error = array('error' => $this->upload->display_errors());
+		        }
+		        else {
+	                $data = array('upload_data' => $this->upload->data());
+	                // cek apakah berkas siswa sudah di DB
+	                $this->db->where('ID_siswa', $id);
+	                $r = $this->db->get('persyaratan');
+
+		            $ins[$key] = $data['upload_data']['file_name'];
+		            $ins['ID_siswa'] = $id;
+	                
+	                if ($r->num_rows() < 1) { //data belum ada
+		                $this->db->insert('persyaratan', $ins);
+	                }else { //data sudah ada
+	                	$this->db->where('ID_siswa', $id);
+	                	$this->db->update('persyaratan', $ins);
+	                }
+
+	                if ($this->db->affected_rows() > 0) {
+	                	$uploaded++;
+	                }else {
+	                	
+	                }
+		        }
+			}
+		}
+
+		if ($uploaded == $sum) {
+			$this->session->set_flashdata('status', 'semua berkas berhasil diupload');
+		}else if ($uploaded > 0 && $uploaded < $sum) {
+			$this->session->set_flashdata('status', 'sebagian file tidak terupload');
+		}else {
+			$this->session->set_flashdata('status', 'upload file gagal');
+		}
+
+		redirect(base_url('siswa/berkas'),'refresh');
 	}
 
 	function nilai()
@@ -216,6 +317,9 @@ class Siswa extends CI_Controller {
 		$r = $this->db->get('jurusan');
 		$data['jurusan'] = $r->result();
 
+		$r = $this->UserModel->get_status_siswa($this->session->userdata('ID_siswa'));
+		$data['status_pendaftaran'] = $r;
+
 
 		$this->template->user('user/siswa/jurusan', $data);
 	}
@@ -241,6 +345,85 @@ class Siswa extends CI_Controller {
 		}
 
 		redirect(base_url('siswa/jurusan'),'refresh');
+	}
+
+	function verifikasi()
+	{
+		// variabel kebutuhan tampilan
+		$data['title'] = 'Verifikasi';
+		$data['menu_verif'] = 1;
+
+		// cek kelengkapan
+		$data['kelengkapan'] = $this->kelengkapan->cek($this->session->userdata('ID_siswa'));
+		$sum = count($data['kelengkapan']);
+		$c = 0;
+		foreach ($data['kelengkapan'] as $value) {
+			if ($value == 1) {
+				$c++;
+			}
+		}
+		if ($c == $sum) {
+			$data['verifikasi'] = TRUE;
+		}else {
+			$data['verifikasi'] = FALSE;
+		}
+
+		// mengambil data status
+		$data['siswa'] = $this->UserModel->get_status_siswa($this->session->userdata('ID_siswa'));
+
+		$this->template->user('user/siswa/verifikasi', $data);
+	}
+
+	function submit()
+	{
+		$data['status_pendaftaran'] = 2;
+		$this->db->where('ID_siswa', $_POST['ID_siswa']);
+		$this->db->update('siswa', $data);
+
+		if ($this->db->affected_rows() > 0) {
+			$this->session->set_flashdata('status', 'Data telah disubmit');
+		}else {
+			$this->session->set_flashdata('status', 'Data gagal disubmit');
+		}
+
+		redirect(base_url('siswa/verifikasi'),'refresh');
+	}
+
+	function cetak()
+	{
+		// variabel kebutuhan tampilan
+		$data['title'] = 'Cetak Kartu Pendaftaran';
+		$data['menu_cetak'] = 1;
+
+		// mengambil data siswa
+		$data['siswa'] = $this->UserModel->get_data_siswa_for_kartu($this->session->userdata('ID_siswa'));
+		$data['header'] = $this->load->view('user/layout/header', $data,TRUE);
+
+		$where['ID_jurusan'] = $data['siswa']->pilihan1;
+		$jurusan1 = $this->db->get_where('jurusan', $where);
+		$jurusan1 = $jurusan1->row();
+
+		$where['ID_jurusan'] = $data['siswa']->pilihan2;
+		$jurusan2 = $this->db->get_where('jurusan', $where);
+		$jurusan2 = $jurusan2->row();
+
+		$data['siswa']->jurusan1 = $jurusan1->nama_jurusan;
+		$data['siswa']->jurusan2 = $jurusan2->nama_jurusan;
+
+		$data['kartu_peserta'] = $this->load->view('user/siswa/kartu_peserta', $data, TRUE);
+		
+
+		if (isset($_POST['submit'])) {
+			$r = $this->load->view('user/siswa/kartu2', $data, TRUE);
+			$html = $r;
+			// $html = $this->template->kartu('user/siswa/kartu_peserta', $data);
+			$nama = "Kartu-Peserta-PPDB-SMKN-88-BDG";
+			// echo $html;
+			$this->pdf->generate_pdf($html, $nama);
+		}else {
+			$this->template->user('user/siswa/cetak', $data);
+		}
+
 	}
 
 }

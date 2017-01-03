@@ -78,11 +78,18 @@
 						</select>
 					</div>
 				</div>
+				<?php
+					if ($status_pendaftaran->status_pendaftaran <= 2) {
+				?>
 
 				<div class="col-md-12 col-sm-12 col-xs-12" align="center">
 					<input type="hidden" name="ID_siswa" value="<?php echo $this->session->userdata('ID_siswa'); ?>">
 					<button type="submit" class="btn btn-success">Simpan</button>
 				</div>
+
+				<?php
+					}
+				?>
 			</form>
 
 			<div class="clearfix">

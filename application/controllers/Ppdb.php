@@ -25,6 +25,7 @@ class Ppdb extends CI_Controller {
 
 	function sekolah($res = NULL)
 	{
+		$data['title'] = 'Pendaftaran Sekolah';
 		if ($res == NULL) {
 			$content = 'user/sekolah/form_registrasi_sekolah';
 			$data['list_provinsi'] = $this->GeneralModel->get_all('provinsi');
@@ -113,7 +114,8 @@ class Ppdb extends CI_Controller {
 						$array = array(
 						'log_siswa' => TRUE,
 						'nama_siswa' => $r->nama_lengkap,
-						'ID_siswa' => $r->ID_siswa
+						'ID_siswa' => $r->ID_siswa,
+						'status_pendaftaran' => $r->status_pendaftaran
 						);
 						
 						$this->session->set_userdata($array);
@@ -143,7 +145,8 @@ class Ppdb extends CI_Controller {
 				$array = array(
 				'log_siswa' => TRUE,
 				'nama_siswa' => $r->nama_lengkap,
-				'ID_siswa' => $r->ID_siswa
+				'ID_siswa' => $r->ID_siswa,
+				'status_pendaftaran' => $r->status_pendaftaran
 				);
 				
 				$this->session->set_userdata($array);

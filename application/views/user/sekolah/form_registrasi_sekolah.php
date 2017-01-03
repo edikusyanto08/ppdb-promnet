@@ -130,7 +130,7 @@
 
 	            <div class="form-group">
 	            	<div class="col-md-offset-2">
-	            		<input type="checkbox" name="" value="" required /> Dengan menceklis ini anda setuju dengan syarat dan konsisi yang berlaku
+	            		<input type="checkbox" name="" value="" required /> Saya setuju dengan syarat dan konsisi yang berlaku
 	            	</div>
 	            </div>
 

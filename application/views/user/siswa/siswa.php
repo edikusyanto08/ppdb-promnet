@@ -43,13 +43,17 @@
 				<h3>Status Anda Saat Ini</h3>
 			</div>
 			<div class="col-md-offset-3 col-md-6 col-sm-12 col-xs-12">
-				<div class="box box-info">
+				<div class="box box-<?php echo $warna; ?>">
 					<div class="page-header">
-						<p class="text-info" align="center">Mendaftar</p>
+						<p class="text-<?php echo $warna; ?>" align="center"><?php echo $siswa->nama_status; ?></p>
 					</div>
 					<div class="page-content">
 						<p>
-							Silahkan lengkapi persyaratan dan kelengkapan data diri anda.
+							<?php
+								if (isset($pesan)) {
+									echo $pesan;
+								}
+							?>
 						</p>
 					</div>
 				</div>
@@ -112,7 +116,7 @@
 			<div class="col-md-3 col-sm-3 col-xs-12">
 				<div class="box box-success">
 					<div class="page-header">
-						<h4  class="text-success">Diterima</h4>
+						<h4  class="text-success">Diterima/Tidak diterima</h4>
 					</div>
 					<div class="page-body">
 						<p class="text-default" align="justify">
