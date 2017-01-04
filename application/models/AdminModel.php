@@ -48,6 +48,45 @@ class AdminModel extends CI_Model {
 		return $r;
 	}
 
+	function count_jurusan_dipilih()
+	{
+		
+	}
+
+	function get_data_siswa_lengkap_by_id($id)
+	{
+		$where['ID_siswa'] = $id;
+
+		// get from data siswa
+		$siswa = $this->db->get_where('siswa', $where);
+		$siswa = $siswa->row();
+
+		// get from data alamat
+		$q = "SELECT b.nama_provinsi FROM alamat a, provinsi b, kota c, kecamatan d WHERE a.kecamatan=d.ID_kecamatan and d.ID_kota=c.ID_kota and c.ID_provinsi=b.ID_provinsi and a.ID_siswa = $id";
+		$alamat = $this->db->query($q);
+		$alamat = $alamat->row();
+
+		// get from data orangtua
+		$orangtua = $this->db->get_where('orangtua', $where);
+		$orangtua = $orangtua->row();
+
+		// get from persyaratan
+		$persyaratan = $this->db->get_where('persyaratan', $where);
+		$persyaratan = $persyaratan->row();
+
+		// get data from un
+		$un = $this->db->get_where('un', $where);
+		$un = $un->row();
+
+		$data['siswa'] = $siswa;
+		$data['alamat'] = $alamat;
+		$data['orangtua'] = $orangtua;
+		$data['persyaratan'] = $persyaratan;
+		$data['un'] = $un;
+
+		return $data;
+	}
+
 }
 
 /* End of file adminModel.php */

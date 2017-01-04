@@ -97,12 +97,12 @@
           <!-- small box -->
           <div class="small-box bg-blue">
             <div class="inner">
-              <h3><?php echo $siswa_terdaftar; ?></h3>
+              <h3><?php echo $jurusan_dipilih; ?></h3>
 
               <p>Jurusan Dipilih</p>
             </div>
             <div class="icon">
-              <i class="fa fa-user<?php if($siswa_terdaftar > 1) echo "s"; ?>"></i>
+              <i class="fa fa-user"></i>
             </div>
             <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
           </div>
@@ -113,7 +113,7 @@
           <!-- small box -->
           <div class="small-box bg-navy">
             <div class="inner">
-              <h3><?php echo $siswa_terdaftar; ?></h3>
+              <h3><?php echo $luar_kota; ?></h3>
 
               <p>Siswa Luar kota</p>
             </div>

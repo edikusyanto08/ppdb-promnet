@@ -78,6 +78,7 @@
       			<?php
       				if ($list_jurusan != NULL) {
       					$c =1;
+                $i=0;
       					foreach ($list_jurusan as $value) {
       			?>
       						<tr>
@@ -102,7 +103,7 @@
       							?>
       										<td><?php echo $value->kode_jurusan; ?></td>
             							<td><?php echo $value->nama_jurusan; ?></td>
-            							<td><?php echo $value->kuota_jurusan; ?></td>
+            							<td><?php echo $value->kuota_jurusan-$piljur[$i]; ?></td>
             							<td><?php echo $value->KKM; ?></td>	
             							<td>
             								<a href="<?php echo base_url('admin/jurusan/edit/') .$value->ID_jurusan; ?>" title="Edit"><button type="button" class="btn btn-success btn-sm" ><i class="fa fa-edit"></i></button></a>
@@ -113,7 +114,7 @@
       							?>
       									<td><?php echo $value->kode_jurusan; ?></td>
           							<td><?php echo $value->nama_jurusan; ?></td>
-          							<td><?php echo $value->kuota_jurusan; ?></td>
+          							<td><?php echo $value->kuota_jurusan-$piljur[$i]; ?></td>
           							<td><?php echo $value->KKM; ?></td>
           							<td>
           								<a href="<?php echo base_url('admin/jurusan/edit/') .$value->ID_jurusan; ?>" title="Edit"><button type="button" class="btn btn-success btn-sm" ><i class="fa fa-edit"></i></button></a>
@@ -124,6 +125,7 @@
       							?>
       						</tr>
       			<?php
+                  $i++;
       					}
       				}else {
       			?>

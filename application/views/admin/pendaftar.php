@@ -52,7 +52,7 @@
                       <?php echo $value->nama_status; ?>
                     </td>
                     <td>
-                      <a href="<?php echo base_url('admin/nilai/') .$value->ID_siswa; ?>" title="Lihat">
+                      <a href="<?php echo base_url('admin/detail/siswa/') .$value->ID_siswa; ?>" title="Lihat">
                         <button type="button" class="btn btn-sm btn-success"><span class="fa fa-eye"></span></button>
                       </a>
                     </td>

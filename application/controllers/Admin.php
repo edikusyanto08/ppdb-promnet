@@ -41,6 +41,9 @@ class Admin extends CI_Controller {
 			$data['siswa_terdaftar'] = $this->AdminModel->count_status_pendaftaran(3);
 			$data['siswa_diterima'] = $this->AdminModel->count_status_pendaftaran(4);
 			$data['siswa_ditolak'] = $this->AdminModel->count_status_pendaftaran(5);
+			// $data['jurusan_dipilih'] = $this->AdminModel->count_jurusan_dipilih();
+			$data['jurusan_dipilih'] = 0;
+			$data['luar_kota'] = 0;
 
 			$du = $data['un_terbaik'] = $this->AdminModel->get_best_un();
 
@@ -93,7 +96,16 @@ class Admin extends CI_Controller {
 		}
 
 		$data['menu_jurusan'] = $data['menu_datamaster'] = 'active';
-		$data['list_jurusan'] = $this->GeneralModel->get_all(('jurusan'));
+		$jur = $data['list_jurusan'] = $this->GeneralModel->get_all(('jurusan'));
+
+		foreach ($jur as $value) {
+			$q = "SElECT count(ID_jurusan) as total FROM penerimaan WHERE ID_jurusan='" .$value->ID_jurusan ."'";
+			$r = $this->db->query($q);
+			if ($r->num_rows() > 0) {
+				$r = $r->row();
+				$data['piljur'][] = $r->total;
+			}
+		}
 
 		$this->template->admin('admin/jurusan', $data);
 	}
@@ -478,7 +490,7 @@ class Admin extends CI_Controller {
 
 	function detail($table, $id)
 	{
-		if ($table = 'sekolah') {
+		if ($table == 'sekolah') {
 			$data['menu_sekolah'] = $data['menu_verifikasi'] = 'active';
 			$r = $data['sekolah'] = $this->GeneralModel->get_data_sekolah_by_id($id);
 
@@ -490,10 +502,20 @@ class Admin extends CI_Controller {
 			);
 
 			$this->template->admin('admin/detail_sekolah', $data);
-		}else if ($table = 'siswa') {
-			
+		}else if ($table == 'siswa') {
+			$data = $this->AdminModel->get_data_siswa_lengkap_by_id($id);
+
+			$data['page_header'] = $data['siswa']->nama_lengkap;
+			$data['b_crumb'] = array (
+				'#' => 'Verifikasi',
+				base_url('admin/siswa') => 'Siswa',
+				'' => $data['siswa']->nama_lengkap
+			);
+
+			$this->template->admin('admin/detail_siswa', $data);
 		}
 	}
+
 
 	function logout()
 	{

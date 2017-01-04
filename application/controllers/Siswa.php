@@ -426,6 +426,34 @@ class Siswa extends CI_Controller {
 
 	}
 
+	function pengaturan()
+	{
+		// variabel kebutuhan tampilan
+		$data['title'] = 'Pengaturan';
+		$data['menu_jurusan'] = 'active';
+
+		$this->template->user('user/siswa/pengaturan', $data);
+	}
+
+	function proses_pengaturan()
+	{
+		$where['password'] = md5($_POST['old_password']);
+		$r = $this->db->get_where('siswa', $where);
+		if ($r->num_rows() > 0) {
+			$up['password'] = md5($_POST['new_password']);
+			$this->db->update('siswa', $up);
+			if ($this->db->affected_rows() > 0) {
+				$this->session->set_flashdata('status', 'Password berhasil diperbaharui');
+			}else {
+				$this->session->set_flashdata('status', 'Password gagal diperbaharui');
+			}
+		}else {
+			$this->session->set_flashdata('status', 'Password lama salah');
+		}
+
+		redirect(base_url('siswa/pengaturan'),'refresh');
+	}
+
 }
 
 /* End of file siswa.php */
