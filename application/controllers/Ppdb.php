@@ -236,6 +236,11 @@ class Ppdb extends CI_Controller {
 		redirect(base_url('sekolah/pengaturan'),'refresh');
 	}
 
+	function pengumuman()
+	{
+		
+	}
+
 	function logout()
 	{
 		// mencatat log

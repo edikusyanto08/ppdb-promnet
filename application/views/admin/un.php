@@ -80,11 +80,6 @@
               <td>IPA</td>
               <td><button type="ubtton"><i class="fa fa-edit"></i></button></td>
             </tr>
-            <tr>
-              <td>5</td>
-              <td>IPS</td>
-              <td><button type="subtton"><i class="fa fa-edit"></i></button></td>
-            </tr>
       		</tbody>
       	</table>
       </div>

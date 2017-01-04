@@ -42,6 +42,15 @@ class Admin extends CI_Controller {
 			$data['siswa_diterima'] = $this->AdminModel->count_status_pendaftaran(4);
 			$data['siswa_ditolak'] = $this->AdminModel->count_status_pendaftaran(5);
 
+			$du = $data['un_terbaik'] = $this->AdminModel->get_best_un();
+
+			foreach ($du as $value) {
+				$this->db->where('ID_siswa', $value->ID_siswa);
+				$r = $this->db->get('persyaratan');
+				$r = $r->row();
+				$data['foto'][] = $r->foto;
+			}
+
 			$this->template->admin($content, $data);
 		}
 	}
@@ -332,11 +341,15 @@ class Admin extends CI_Controller {
 		$un = $this->db->get_where('un', $where);
 		$un = $un->row();
 
+		$alamat = $this->db->get_where('alamat', $where);
+		$alamat = $alamat->row();
+
 		$data['siswa'] = $r;
 		$data['jurusan'][] = $p1;
 		$data['jurusan'][] = $p2;
 		$data['berkas'] = $b;
 		$data['un'] = $un;
+		$data['alamat'] = $alamat;
 
 		$this->template->admin('admin/nilai', $data);
 	}
@@ -447,6 +460,39 @@ class Admin extends CI_Controller {
 		$data['list_siswa'] = $this->AdminModel->get_list_siswa_by_status(4);
 
 		$this->template->admin('admin/penerimaan', $data);
+	}
+
+	function pendaftar()
+	{
+		$this->cek_login();
+		$data['page_header'] = 'Pendaftar';
+		$data['b_crumb'] = array (
+			'#' => 'Pendaftar'
+		);
+		$data['menu_pendaftar'] = 'active';
+
+		$data['list_siswa'] = $this->AdminModel->get_pendaftar();
+
+		$this->template->admin('admin/pendaftar', $data);
+	}
+
+	function detail($table, $id)
+	{
+		if ($table = 'sekolah') {
+			$data['menu_sekolah'] = $data['menu_verifikasi'] = 'active';
+			$r = $data['sekolah'] = $this->GeneralModel->get_data_sekolah_by_id($id);
+
+			$data['page_header'] = $r->nama_sekolah;
+			$data['b_crumb'] = array (
+				'#' => 'Verifikasi',
+				base_url('admin/sekolah') => 'Sekolah',
+				'' => $r->nama_sekolah
+			);
+
+			$this->template->admin('admin/detail_sekolah', $data);
+		}else if ($table = 'siswa') {
+			
+		}
 	}
 
 	function logout()

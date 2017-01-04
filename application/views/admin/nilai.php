@@ -61,15 +61,42 @@
         <div class="page-header">
           <h3 class="box-title">Detail untuk <?php echo $siswa->nama_lengkap; ?></h3>
         </div>
-        <div class="">
-          
+        <div class="page-content">
+          <table class="table">
+            <tbody>
+              <tr>
+                <td>Nama Lengkap</td>
+                <td>:</td>
+                <td><?php echo $siswa->nama_lengkap; ?></td>
+              </tr>
+
+              <tr>
+                <td>kontak</td>
+                <td>:</td>
+                <td><?php echo $siswa->kontak; ?></td>
+              </tr>
+
+              <tr>
+                <td>Alamat Email</td>
+                <td>:</td>
+                <td><?php echo $siswa->email; ?></td>
+              </tr>
+
+              <tr>
+                <td>Detail Alamat</td>
+                <td>:</td>
+                <td><?php echo $alamat->detail; ?></td>
+              </tr>
+
+            </tbody>
+          </table>
         </div>
       </div>
     </div>
   </div>
 
   <div class="col-md-3 col-sm-3 col-xs-3">
-    <!-- Profile Image -->
+          <!-- Profile Image -->
           <div class="box box-primary">
             <div class="box-body box-profile">
               <img class="profile-user-img img-responsive img-circle" src="<?php echo base_url('upload/').$berkas->foto; ?>" alt="User profile picture">

@@ -128,5 +128,57 @@
       <!-- /.row -->
       <!-- Main row -->
       <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="box box-primary container-fluid">
+          <div class="page-header">
+            <h3>Peserta dengan nilai UN terbaik</h3>
+          </div>
+          <div class="page-content">
+              <?php
+                $i = 0;
+                foreach ($un_terbaik as $value) {
+              ?>
+              <div class="col-md-3 col-sm-3 col-xs-3">
+          <!-- Profile Image -->
+          <div class="box box-primary">
+            <div class="box-body box-profile">
+              <?php
+                if ($foto[$i] != '') {
+              ?>
+                  <img class="profile-user-img img-responsive img-circle" src="<?php echo base_url('upload/') .$foto[$i]; ?>" alt="User profile picture">
+              <?php
+                }else {
+              ?>
+                  <img class="profile-user-img img-responsive img-circle" src="<?php echo base_url('upload/user.png'); ?>" alt="User profile picture">
+              <?php
+                }
+              ?>
+
+              <h3 class="profile-username text-center"><?php echo $value->nama_lengkap; ?></h3>
+
+              <p class="text-muted text-center"><?php echo $value->nama_sekolah; ?></p>
+              <ul class="list-group list-group-unbordered">
+                <li class="list-group-item">
+                  <b>Nilai Total</b> <a class="pull-right"><?php echo $value->total; ?></a>
+                </li>
+              </ul>
+
+              <a href="<?php echo base_url('admin/nilai/') .$value->ID_siswa; ?>" class="btn btn-primary btn-block"><b>Lihat</b></a>
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <!-- /.box -->
+  </div>
+              <?php
+                  $i++;
+                }
+              ?>
+              <div class="clearfix">
+                
+              </div>
+            </div>
+          </div>
+        </div>
+          
       </div>
       <!-- /.row (main row) -->

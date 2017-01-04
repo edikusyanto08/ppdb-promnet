@@ -86,8 +86,8 @@
         </li>
 
         <li class="<?php if(isset($menu_pendaftar)) echo $menu_pendaftar; ?>">
-          <a href="<?php echo base_url('admin/penerimaan'); ?>">
-            <i class="fa fa-user-plus"></i> <span>Penerimaan</span>
+          <a href="<?php echo base_url('admin/pendaftar'); ?>">
+            <i class="fa fa-user-plus"></i> <span>Pendaftar</span>
             <span class="pull-right-container">
               <!-- <small class="label pull-right bg-green">new</small> -->
             </span>
