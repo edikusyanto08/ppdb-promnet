@@ -163,7 +163,7 @@
                 </li>
               </ul>
 
-              <a href="<?php echo base_url('admin/nilai/') .$value->ID_siswa; ?>" class="btn btn-primary btn-block"><b>Lihat</b></a>
+              <a href="<?php echo base_url('admin/detail/siswa/') .$value->ID_siswa; ?>" class="btn btn-primary btn-block"><b>Lihat</b></a>
             </div>
             <!-- /.box-body -->
           </div>

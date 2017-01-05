@@ -43,20 +43,59 @@
 				<h3>Status Anda Saat Ini</h3>
 			</div>
 			<div class="col-md-offset-3 col-md-6 col-sm-12 col-xs-12">
-				<div class="box box-<?php echo $warna; ?>">
-					<div class="page-header">
-						<p class="text-<?php echo $warna; ?>" align="center"><?php echo $siswa->nama_status; ?></p>
-					</div>
-					<div class="page-content">
-						<p>
-							<?php
-								if (isset($pesan)) {
-									echo $pesan;
-								}
-							?>
-						</p>
-					</div>
-				</div>
+				<?php
+					if ($siswa->status_pendaftaran > 3) {
+						if ($now >= $tanggal_pengumuman) {
+				?>
+							<div class="box box-<?php echo $warna; ?>">
+								<div class="page-header">
+									<p class="text-<?php echo $warna; ?>" align="center"><?php echo $siswa->nama_status; ?></p>
+								</div>
+								<div class="page-content">
+									<p>
+										<?php
+											if (isset($pesan)) {
+												echo $pesan;
+											}
+										?>
+									</p>
+								</div>
+							</div>
+				<?php
+						}else {
+				?>
+							<div class="box box-primary">
+								<div class="page-header">
+									<p class="text-primary" align="center">Terdaftar</p>
+								</div>
+								<div class="page-content">
+									<p>
+										
+									</p>
+								</div>
+							</div>
+				<?php
+						}
+					}else {
+				?>
+						<div class="box box-<?php echo $warna; ?>">
+							<div class="page-header">
+								<p class="text-<?php echo $warna; ?>" align="center"><?php echo $siswa->nama_status; ?></p>
+							</div>
+							<div class="page-content">
+								<p>
+									<?php
+										if (isset($pesan)) {
+											echo $pesan;
+										}
+									?>
+								</p>
+							</div>
+						</div>
+				<?php
+					}
+				?>
+				
 			</div>
 
 			<div class="clearfix">

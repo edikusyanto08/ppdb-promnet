@@ -58,11 +58,12 @@ class AdminModel extends CI_Model {
 		$where['ID_siswa'] = $id;
 
 		// get from data siswa
-		$siswa = $this->db->get_where('siswa', $where);
+		$q = "SELECT * FROM siswa a, sekolah b, status c WHERE a.ID_sekolah = b.ID_sekolah and a.status_pendaftaran = c.ID_status and a.ID_siswa = $id";
+		$siswa = $this->db->query($q);
 		$siswa = $siswa->row();
 
 		// get from data alamat
-		$q = "SELECT b.nama_provinsi FROM alamat a, provinsi b, kota c, kecamatan d WHERE a.kecamatan=d.ID_kecamatan and d.ID_kota=c.ID_kota and c.ID_provinsi=b.ID_provinsi and a.ID_siswa = $id";
+		$q = "SELECT * FROM alamat a, provinsi b, kota c, kecamatan d WHERE a.kecamatan=d.ID_kecamatan and d.ID_kota=c.ID_kota and c.ID_provinsi=b.ID_provinsi and a.ID_siswa = $id";
 		$alamat = $this->db->query($q);
 		$alamat = $alamat->row();
 
@@ -77,6 +78,22 @@ class AdminModel extends CI_Model {
 		// get data from un
 		$un = $this->db->get_where('un', $where);
 		$un = $un->row();
+		
+		// get data jurusan
+		$jurusan = $this->db->get_where('pilihan', $where);
+		$jurusan = $jurusan->row();
+		if ($jurusan != NULL) {
+			$w['ID_jurusan'] = $jurusan->pilihan1;
+			$j1 = $this->db->get_where('jurusan', $w);
+			$j1 = $j1->row();
+			$w['ID_jurusan'] = $jurusan->pilihan2;
+			$j2 = $this->db->get_where('jurusan', $w);
+			$j2 = $j2->row();
+			$data['jurusan'][0] = $j1;
+			$data['jurusan'][1] = $j2;
+		}else {
+			$data['jurusan'] = $jurusan;
+		}
 
 		$data['siswa'] = $siswa;
 		$data['alamat'] = $alamat;

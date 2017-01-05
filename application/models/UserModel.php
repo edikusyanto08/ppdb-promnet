@@ -27,11 +27,34 @@ class UserModel extends CI_Model {
 		return $c;
 	}
 
+	function count_diterima_by_sekolah($id)
+	{
+		$this->db->where('ID_sekolah', $id);
+		$r = $this->db->where('status_pendaftaran', 4);
+		$c = $this->db->count_all_results('siswa');
+		return $c;
+	}
+
+	function count_ditolak_by_sekolah($id)
+	{
+		$this->db->where('ID_sekolah', $id);
+		$r = $this->db->where('status_pendaftaran', 5);
+		$c = $this->db->count_all_results('siswa');
+		return $c;
+	}
+
 	function get_status_siswa($id)
 	{
 		$q = "SELECT a.nama_lengkap as nama_lengkap, a.status_pendaftaran as status_pendaftaran, b.nama_status as nama_status from siswa a, status b where a.status_pendaftaran=b.ID_status and a.ID_siswa = $id";
 		$r = $this->db->query($q);
 		return $r->row();
+	}
+
+	function get_status_siswa_by_sekolah($id)
+	{
+		$q = "SELECT a.NISN, a.status_pendaftaran, a.nama_lengkap, a.username, a.password, c.nama_status from siswa a, sekolah b, status c WHERE a.status_pendaftaran = c.ID_status and a.ID_sekolah = b.ID_sekolah and a.ID_sekolah = $id";
+		$r = $this->db->query($q);
+		return $r->result();
 	}
 
 	function get_data_siswa_for_kartu($id)

@@ -53,6 +53,12 @@ class Siswa extends CI_Controller {
 			$data['pesan'] = "Mohon maaf $nama, Anda belum bisa kami terima. <br> Hei, Sukses adalah kemampuan untuk pergi dari suatu kegagalan tanpa kehilangan semangat. Tetap semangat ya :)";
 		}
 
+		$this->db->where('nama_tetapan', 'tanggal_pengumuman');
+		$r = $this->db->get('tetapan');
+		$r = $r->row();
+		$data['tanggal_pengumuman'] = $r->isi_tetapan;
+		$data['now'] = date('Y-m-d');
+
 		$this->template->user('user/siswa/siswa', $data);
 	}
 
@@ -113,6 +119,8 @@ class Siswa extends CI_Controller {
 		// datadiri siswa
 		$siswa['email'] = $_POST['email'];
 		$siswa['kontak'] = $_POST['kontak'];
+		$siswa['jenis_kelamin'] = $_POST['jenis_kelamin'];
+		$siswa['tgl_lahir'] = $_POST['tgl_lahir'];
 
 		// data ortu siswa
 		$ortu['nama_ayah'] = $_POST['nama_ayah'];

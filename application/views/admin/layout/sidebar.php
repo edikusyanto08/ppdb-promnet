@@ -30,7 +30,7 @@
           <a href="<?php echo base_url('admin'); ?>">
             <i class="fa fa-dashboard"></i> <span>Dashboard</span>
             <span class="pull-right-container">
-              <small class="label pull-right bg-green">new</small>
+              <!-- <small class="label pull-right bg-green">new</small> -->
             </span>
           </a>
         </li>
@@ -88,6 +88,15 @@
         <li class="<?php if(isset($menu_pendaftar)) echo $menu_pendaftar; ?>">
           <a href="<?php echo base_url('admin/pendaftar'); ?>">
             <i class="fa fa-user-plus"></i> <span>Pendaftar</span>
+            <span class="pull-right-container">
+              <!-- <small class="label pull-right bg-green">new</small> -->
+            </span>
+          </a>
+        </li>
+
+        <li class="<?php if(isset($menu_pengaturan)) echo $menu_pengaturan; ?>">
+          <a href="<?php echo base_url('admin/pengaturan'); ?>">
+            <i class="fa fa-cog"></i> <span>Pengaturan</span>
             <span class="pull-right-container">
               <!-- <small class="label pull-right bg-green">new</small> -->
             </span>

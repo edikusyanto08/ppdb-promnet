@@ -64,8 +64,8 @@
 					<div class="form-group">
 		              <label for="jenis_kelamin" class="col-sm-3 col-md-3 col-xs-12 control-label">Jenis Kelamin</label>
 		              <div class="col-sm-7">
-		                <input type="radio" class="radio" name="jenis_kelamin" id="jenis_kelamin" value="<?php echo $siswa['siswa']->jenis_kelamin; ?>" required />Laki-laki
-		                <input type="radio" class="radio" name="jenis_kelamin" id="jenis_kelamin" value="<?php echo $siswa['siswa']->jenis_kelamin; ?>" required />Perempuan
+		                <input type="radio" name="jenis_kelamin" id="jenis_kelamin" value="Laki-laki" <?php if($siswa['siswa']->jenis_kelamin == 'Laki-laki') echo "checked"; ?> required /> Laki-laki <br>
+		                <input type="radio" name="jenis_kelamin" id="jenis_kelamin" value="Perempuan" <?php if($siswa['siswa']->jenis_kelamin == 'Perempuan') echo "checked"; ?> required /> Perempuan
 		              </div>
 		            </div>
 

@@ -54,6 +54,7 @@
 							<th>Nama Siswa</th>
 							<th>Username</th>
 							<th>Password</th>
+							<th>Status</th>
 							<th>Aksi</th>
 						</tr>
 					</thead>
@@ -79,6 +80,19 @@
 												}
 											?>
 											
+										</td>
+										<td>
+											<?php
+												if ($value->status_pendaftaran > 3) {
+													if ($pengumuman == TRUE) {
+														echo $value->nama_status;
+													}else {
+														echo 'Terdaftar';
+													}
+												}else {
+													echo $value->nama_status;
+												}
+											?>
 										</td>
 										<td><button type="button" class="btn btn-info btn-sm"><i class="fa fa-eye"></i></button></td>
 									</tr>

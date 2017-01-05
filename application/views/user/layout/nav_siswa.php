@@ -21,7 +21,7 @@
         <li class="<?php if(isset($menu_jurusan)) echo "active"; ?>" ><a href="<?php echo base_url('siswa/jurusan'); ?>">Pilihan Jurusan</a></li>
         <li class="<?php if(isset($menu_verif)) echo "active"; ?>" ><a href="<?php echo base_url('siswa/verifikasi'); ?>">Verifikasi</a></li>
         <?php
-          if ($this->session->userdata('status_pendaftaran') == 3) {
+          if ($this->session->userdata('status_pendaftaran') >= 3) {
         ?>
         <li class="<?php if(isset($menu_cetak)) echo "active"; ?>" ><a href="<?php echo base_url('siswa/cetak'); ?>">Cetak Kartu</a></li>
         <?php

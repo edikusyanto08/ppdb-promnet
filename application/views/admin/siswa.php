@@ -59,7 +59,7 @@
                       <a href="<?php echo base_url('admin/verifikasi/siswa/3/') .$value->ID_siswa; ?>" title="Verifikasi">
                         <button type="button" class="btn btn-sm btn-success"><span class="fa fa-check"></span></button>
                       </a>
-                      <a href="#" title="Lihat">
+                      <a href="<?php echo base_url('admin/detail/siswa/') .$value->ID_siswa; ?>" title="Lihat">
                         <button type="button" class="btn btn-sm btn-success"><span class="fa fa-eye"></span></button>
                       </a>
                     </td>

@@ -516,6 +516,35 @@ class Admin extends CI_Controller {
 		}
 	}
 
+	function pengaturan()
+	{
+		$data['page_header'] = 'Pengaturan';
+		$data['b_crumb'] = array (
+			'#' => 'Pengaturan'
+		);
+		$data['menu_pengaturan'] = 'active';
+
+		$r = $this->db->get('tetapan');
+		$r = $r->result();
+
+		foreach ($r as $value) {
+			$data[$value->nama_tetapan] = $value->isi_tetapan;
+		}
+
+		$this->template->admin('admin/pengaturan', $data);
+	}
+
+	function proses_pengaturan()
+	{
+		$this->db->where('ID_tetapan', $_POST['ID_tetapan']);
+		$this->db->update('tetapan', $_POST);
+		if ($this->db->affected_rows() > 0) {
+			$this->session->set_flashdata('status', 'Data disimpan');
+		}
+		// var_dump($_POST);
+		redirect(base_url('admin/pengaturan'),'refresh');
+	}
+
 
 	function logout()
 	{

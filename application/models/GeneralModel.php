@@ -85,6 +85,14 @@ class GeneralModel extends CI_Model {
 
 		$this->db->insert('log', $data);
 	}
+
+	function get_pengumuman()
+	{
+		$q = "SELECT b.NISN, b.nama_lengkap, c.nama_sekolah, d.nama_jurusan from penerimaan a, siswa b, sekolah c, jurusan d WHERE a.ID_siswa = b.ID_siswa and a.ID_jurusan = d.ID_jurusan and b.ID_sekolah = c.ID_sekolah";
+		$r = $this->db->query($q);
+		$r = $r->result();
+		return $r;
+	}
 	
 }
 

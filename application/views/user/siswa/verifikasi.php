@@ -43,7 +43,16 @@
 				<h3 align="center">Verifikasi</h3>
 			</div>
 			<?php
+				$i = 0;
 				foreach ($kelengkapan as $key => $value) {
+					if($i == 4){
+			?>
+						<div class="clearfix">
+							
+						</div>
+			<?php
+					}
+					$i++;
 					if ($value == 1) {
 			?>
 						<div class="col-md-3 col-sm-6 col-xs-12">

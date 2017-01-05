@@ -63,6 +63,17 @@
         <h2 class="title">Berita Terbaru</h2>
         <div id="hpage_latestnews">
           <ul>
+            <?php
+              if ($pengumuman == TRUE) {
+            ?>
+                <li>
+                  <div class="imgl"><img src="<?php echo base_url('assets/landingpage/'); ?>images/demo/160x80.gif" alt="" /></div>
+                  <p class="latestnews">Pengumuman Penerimaan Peserta Didik Baru Tahun Ajaran 2017/2018. <br> Terimakasih kepada semua pendaftar....</p>
+                  <p class="readmore"><a href="<?php echo base_url('welcome/pengumuman'); ?>">Continue Reading &raquo;</a></p>
+                </li>
+            <?php    
+              }
+            ?>
             <li>
               <div class="imgl"><img src="<?php echo base_url('assets/landingpage/'); ?>images/demo/160x80.gif" alt="" /></div>
               <p class="latestnews">This is a W3C compliant free website template from <a href="http://www.os-templates.com/" title="Free Website Templates">OS Templates</a>. This template is distributed using a <a href="http://www.os-templates.com/template-terms">Website Template Licence</a>.</p>

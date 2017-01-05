@@ -18,9 +18,21 @@ class Sekolah extends CI_Controller {
 			$data['first_log'] = 1;
 		}
 
+		$this->db->where('nama_tetapan', 'tanggal_pengumuman');
+		$r = $this->db->get('tetapan');
+		$r = $r->row();
+		$tanggal_pengumuman = $r->isi_tetapan;
+		$n = date('Y-m-d');
+		if ($n >= $tanggal_pengumuman ) {
+			$data['pengumuman'] = TRUE;
+		}else $data['pengumuman'] = FALSE;
+
 		$data['title'] = $this->session->userdata('nama_sekolah');
 		$data['menu_home'] = 1;
 		$data['mendaftar'] = $this->UserModel->count_mendaftar_by_sekolah($this->session->userdata('ID_sekolah'));
+		$data['pending'] = $this->UserModel->count_pending_by_sekolah($this->session->userdata('ID_sekolah'));
+		$data['terdaftar'] = $this->UserModel->count_terdaftar_by_sekolah($this->session->userdata('ID_sekolah'));
+		$data['diterima'] = $this->UserModel->count_diterima_by_sekolah($this->session->userdata('ID_sekolah'));
 
 		$this->template->user('user/sekolah/sekolah', $data);
 	}
@@ -51,9 +63,16 @@ class Sekolah extends CI_Controller {
 		$data['title'] = 'Siswa';
 		$data['menu_siswa'] = 1;
 
-		$where['ID_sekolah'] = $this->session->userdata('ID_sekolah');
-		$r = $this->db->get_where('siswa', $where);
-		$data['list_siswa'] = $r->result();
+		$this->db->where('nama_tetapan', 'tanggal_pengumuman');
+		$r = $this->db->get('tetapan');
+		$r = $r->row();
+		$tanggal_pengumuman = $r->isi_tetapan;
+		$n = date('Y-m-d');
+		if ($n >= $tanggal_pengumuman ) {
+			$data['pengumuman'] = TRUE;
+		}else $data['pengumuman'] = FALSE;
+		
+		$data['list_siswa'] = $this->UserModel->get_status_siswa_by_sekolah($this->session->userdata('ID_sekolah'));
 
 		$this->template->user('user/sekolah/siswa', $data);
 	}

@@ -92,7 +92,7 @@
 	<div class="small-box bg-blue">
 	    <div class="inner">
 	 	   <h3><?php 
-	 	   		if (isset($diterima)) {
+	 	   		if (isset($diterima) && $pengumuman == TRUE) {
 	 	   			echo $diterima;
 	 	   		}else echo "0";
 	 	   ?></h3>

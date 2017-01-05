@@ -20,7 +20,7 @@
 <div class="wrapper row2">
   <div id="topnav">
     <ul>
-      <li class="active"><a href="index.html">Beranda</a></li>
+      <li class="active"><a href="<?php echo base_url(); ?>">Beranda</a></li>
       <li><a href="#">Profil</a></li>
       <li><a href="#">Sejarah</a></li>
       <li><a href="#">Program Studi</a>
