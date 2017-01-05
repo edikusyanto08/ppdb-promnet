@@ -61,6 +61,21 @@
 		              </div>
 		            </div>
 
+					<div class="form-group">
+		              <label for="jenis_kelamin" class="col-sm-3 col-md-3 col-xs-12 control-label">Jenis Kelamin</label>
+		              <div class="col-sm-7">
+		                <input type="radio" class="radio" name="jenis_kelamin" id="jenis_kelamin" value="<?php echo $siswa['siswa']->jenis_kelamin; ?>" required />Laki-laki
+		                <input type="radio" class="radio" name="jenis_kelamin" id="jenis_kelamin" value="<?php echo $siswa['siswa']->jenis_kelamin; ?>" required />Perempuan
+		              </div>
+		            </div>
+
+					<div class="form-group">
+		              <label for="tgl_lahir" class="col-sm-3 col-md-3 col-xs-12 control-label">Tanggal Lahir</label>
+		              <div class="col-sm-7">
+		                <input type="date" class="form-control" name="tgl_lahir" id="tgl_lahir" value="<?php echo $siswa['siswa']->tgl_lahir; ?>" placeholder="Tanggal Lahir" required />
+		              </div>
+		            </div>
+
 		            <div class="form-group">
 		              <label for="email" class="col-sm-3 col-md-3 col-xs-12 control-label">Alamat Email</label>
 		              <div class="col-sm-7">

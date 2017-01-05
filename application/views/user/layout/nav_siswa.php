@@ -41,8 +41,8 @@
             <span class="caret"></span>
           </a>
           <ul class="dropdown-menu">
-            <li class="<?php if(isset($menu_profile)) echo"active"; ?>"><a href="<?php echo base_url('siswa/profile'); ?>">Profile</a></li>
-            <li><a href="<?php echo base_url('siswa/pemberitahuan'); ?>">Pemberitahuan</a></li>
+<!--             <li class="<?php if(isset($menu_profile)) echo"active"; ?>"><a href="<?php echo base_url('siswa/profile'); ?>">Profile</a></li>
+            <li><a href="<?php echo base_url('siswa/pemberitahuan'); ?>">Pemberitahuan</a></li>-->
             <li><a href="<?php echo base_url('siswa/pengaturan'); ?>">Pengaturan</a></li>
             <li role="separator" class="divider"></li>
             <li><a href="<?php echo base_url('ppdb/logout'); ?>">Logout</a></li>

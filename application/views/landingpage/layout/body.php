@@ -30,7 +30,7 @@
             <li><a href="#">What's On</a></li>
           </ul>
         </div>
-        <h2 class="title">Latest Gallery Images</h2>
+        <h2 class="title">Galeri Terbaru</h2>
         <div id="hpage_gallery">
           <ul class="clear">
             <li><a href="#"><img src="<?php echo base_url('assets/landingpage/'); ?>images/demo/175x130.gif" alt="" /></a></li>
@@ -46,7 +46,7 @@
             <li><span>Twitter:</span> <a href="#">www.twitter.com/myhandel</a></li>
             <li class="last"><span>LinkedIn:</span> <a href="#">www.linkedin.com/myhandel</a></li>
           </ul>
-          <p><strong>Subscribe To Our Newsletter</strong></p>
+          <p><strong>Berlangganan</strong></p>
           <p>Justoid nonummy laoreet phasellent penatoque in antesque pellus elis eget tincidunt. Nequatdui laorem justo a non tellus laoreet tincidunt ut vel velit.</p>
           <form action="#" method="post">
             <fieldset>
@@ -60,7 +60,7 @@
       </div>
       <!-- ############### -->
       <div class="fl_right">
-        <h2 class="title">Latest News</h2>
+        <h2 class="title">Berita Terbaru</h2>
         <div id="hpage_latestnews">
           <ul>
             <li>
@@ -91,7 +91,7 @@
               </div>
             </li>
             <li>
-              <h2 class="title">Sporting Activities</h2>
+              <h2 class="title">Aktivitas Olahraga</h2>
               <div class="box">
                 <p><strong>Jan 01:</strong> <a href="#">Rugby</a></p>
                 <div class="imgholder"><img src="<?php echo base_url('assets/landingpage/'); ?>images/demo/160x80.gif" alt="" /></div>
@@ -104,7 +104,7 @@
               </div>
             </li>
             <li class="last">
-              <h2 class="title">Upcoming Events</h2>
+              <h2 class="title">Acara Yang Akan Datang</h2>
               <div class="box">
                 <p><a href="#">Magna phasellus</a></p>
                 <p>Monday 21st January</p>
