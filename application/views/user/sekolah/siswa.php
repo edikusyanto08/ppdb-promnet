@@ -55,7 +55,7 @@
 							<th>Username</th>
 							<th>Password</th>
 							<th>Status</th>
-							<th>Aksi</th>
+							<!-- <th>Aksi</th> -->
 						</tr>
 					</thead>
 					<tbody>
@@ -94,7 +94,7 @@
 												}
 											?>
 										</td>
-										<td><button type="button" class="btn btn-info btn-sm"><i class="fa fa-eye"></i></button></td>
+										<!-- <td><button type="button" class="btn btn-info btn-sm"><i class="fa fa-eye"></i></button></td> -->
 									</tr>
 						<?php
 									$c++;
@@ -106,6 +106,9 @@
 				<p class="text-danger">
 					*ketika siswa login password akan dienkripsi untuk keamanan.
 				</p>
+				<form action="" method="POST" accept-charset="utf-8">
+					<input class="btn btn-primary" type="submit" name="cetak" value="Cetak">
+				</form>
 			</div>
 		</div>
 	</div>

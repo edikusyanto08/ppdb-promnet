@@ -9,6 +9,7 @@ class Sekolah extends CI_Controller {
 		$this->load->library('Template');
 		$this->load->model('GeneralModel');
 		$this->load->model('UserModel');
+		$this->load->library('Pdf');
 	}
 
 	public function index()
@@ -33,6 +34,7 @@ class Sekolah extends CI_Controller {
 		$data['pending'] = $this->UserModel->count_pending_by_sekolah($this->session->userdata('ID_sekolah'));
 		$data['terdaftar'] = $this->UserModel->count_terdaftar_by_sekolah($this->session->userdata('ID_sekolah'));
 		$data['diterima'] = $this->UserModel->count_diterima_by_sekolah($this->session->userdata('ID_sekolah'));
+		$data['ditolak'] = $this->UserModel->count_ditolak_by_sekolah($this->session->userdata('ID_sekolah'));
 
 		$this->template->user('user/sekolah/sekolah', $data);
 	}
@@ -73,6 +75,12 @@ class Sekolah extends CI_Controller {
 		}else $data['pengumuman'] = FALSE;
 		
 		$data['list_siswa'] = $this->UserModel->get_status_siswa_by_sekolah($this->session->userdata('ID_sekolah'));
+
+		if (isset($_POST['cetak'])) {
+			$html = $this->load->view('user/sekolah/cetak_siswa', $data, TRUE);
+			$nama = "Pendaftaran Siswa di PPDB SMKN 88 BDG";
+			$this->pdf->generate_pdf($html, $nama);
+		}
 
 		$this->template->user('user/sekolah/siswa', $data);
 	}

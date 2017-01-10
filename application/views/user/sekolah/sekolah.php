@@ -75,7 +75,11 @@
 	    <div class="inner">
 	 	   <h3><?php 
 	 	   		if (isset($terdaftar)) {
-	 	   			echo $terdaftar;
+	 	   			if ($pengumuman == FALSE) {
+	 	   				echo $terdaftar+$diterima+$ditolak;
+	 	   			}else {
+	 	   				echo $terdaftar;
+	 	   			}
 	 	   		}else echo "0";
 	 	   ?></h3>
 
