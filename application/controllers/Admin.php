@@ -559,7 +559,7 @@ class Admin extends CI_Controller {
 	      'smtp_host' => 'ssl://smtp.googlemail.com',
 	      'smtp_port' => 465,
 	      'smtp_user' => 'simanjuntakronaldo9@gmail.com',
-	      'smtp_pass' => 'forzamilan14',
+	      'smtp_pass' => '',
 	      'mailtype' => 'html',
 	      'charset' => 'iso-8859-1',
 	      'wordwrap' => TRUE
